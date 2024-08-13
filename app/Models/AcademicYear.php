@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- *
+ * 
  *
  * @method static \Database\Factories\AcademicYearFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|AcademicYear newModelQuery()
@@ -45,4 +45,9 @@ class AcademicYear extends Model
         'ends_at',
         'is_active'
     ];
+
+    public static function getCurrent(): self
+    {
+        return self::where('is_active', true)->firstOrFail();
+    }
 }
