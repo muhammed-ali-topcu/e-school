@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -38,9 +39,22 @@ class Grade extends Model
         'name', 'is_active', 'sequence'
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        self::created(function (self $grade) {
+            $grade->sections()->save(new Section(['name' => 'A']));
+        });
+    }
+
     public function scopeActive($query)
     {
         return $query->where('is_active', 1);
+    }
+
+    public function sections(): HasMany
+    {
+        return $this->hasMany(Section::class);
     }
 
 

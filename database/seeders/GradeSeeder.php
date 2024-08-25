@@ -55,6 +55,7 @@ class GradeSeeder extends Seeder
     {
         foreach ($this->grades as $grade) {
             \App\Models\Grade::create($grade);
+
         }
     }
 }
