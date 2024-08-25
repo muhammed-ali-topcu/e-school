@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Section
- * 
+ *
  * @property int $id
  * @property string $name
  * @property int $grade_id
@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * 
+ *
  * @property Grade $grade
  *
  * @package App\Models
@@ -41,6 +41,11 @@ class Section extends Model
 		'is_active'
 	];
 
+
+    public function scopeIsActive($query)
+    {
+        return $query->where('is_active', 1);
+    }
 	public function grade()
 	{
 		return $this->belongsTo(Grade::class);
