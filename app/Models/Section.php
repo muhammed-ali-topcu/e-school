@@ -20,10 +20,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $deleted_at
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- *
  * @property Grade $grade
- *
  * @package App\Models
+ * @method static \Illuminate\Database\Eloquent\Builder|Section isActive()
+ * @method static \Illuminate\Database\Eloquent\Builder|Section newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Section newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Section onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Section query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereGradeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Section withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Section withoutTrashed()
+ * @mixin \Eloquent
  */
 class Section extends Model
 {

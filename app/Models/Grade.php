@@ -28,6 +28,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Grade whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Grade whereSequence($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Grade whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Section> $sections
+ * @property-read int|null $sections_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Grade active()
+ * @method static \Illuminate\Database\Eloquent\Builder|Grade onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Grade withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|Grade withoutTrashed()
  * @mixin \Eloquent
  */
 class Grade extends Model
@@ -55,6 +61,10 @@ class Grade extends Model
     public function sections(): HasMany
     {
         return $this->hasMany(Section::class);
+    }
+    public function subjects(): HasMany
+    {
+        return $this->hasMany(Subject::class);
     }
 
 

@@ -8,6 +8,7 @@ Sections:
   create section for each grade
   CRUD in panel
 Subjects:
+  # columns: grade_id, Name, is_active,description
   init:
     migration
     model

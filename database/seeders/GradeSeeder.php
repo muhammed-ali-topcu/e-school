@@ -13,38 +13,55 @@ class GradeSeeder extends Seeder
 
     private array $grades = [
         [
-            'name'      => 'Hazırlık',
-            'sequence'  => 0,
+            'name' => 'Hazırlık',
+            'sequence' => 0,
+            'is_active' => 1,
+            'subjects' => [
+                [
+                    'name' => 'Kuran-ı Kerîm (Kıraat)',
+                ],
+                [
+                    'name' => 'Kuran-ı Kerîm (Tecvit)',
+                ],
+                [
+                    'name' => 'Kuran-ı Kerîm (30.Cuz Ezber)',
+                ],
+            ]
+        ],
+        [
+            'name' => 'Birinci',
+            'sequence' => 1,
+            'is_active' => 1,
+            'subjects' => [
+                [
+                    'name' => 'Sarf Nahiv',
+                    'description' => 'Sarf ve Nahiv konusunda sağlam bir temel atılacak. Arapçayı dil olarak sevecek.',
+                ],
+            ]
+        ],
+        [
+            'name' => 'İkinci',
+            'sequence' => 2,
             'is_active' => 1
         ],
         [
-            'name'      => 'Birinci',
-            'sequence'  => 1,
+            'name' => 'Üçüncü',
+            'sequence' => 3,
             'is_active' => 1
         ],
         [
-            'name'      => 'İkinci',
-            'sequence'  => 2,
+            'name' => 'Dördüncü',
+            'sequence' => 4,
             'is_active' => 1
         ],
         [
-            'name'      => 'Üçüncü',
-            'sequence'  => 3,
+            'name' => 'Besinci',
+            'sequence' => 5,
             'is_active' => 1
         ],
         [
-            'name'      => 'Dördüncü',
-            'sequence'  => 4,
-            'is_active' => 1
-        ],
-        [
-            'name'      => 'Besinci',
-            'sequence'  => 5,
-            'is_active' => 1
-        ],
-        [
-            'name'      => 'Ihtisas',
-            'sequence'  => 6,
+            'name' => 'Ihtisas',
+            'sequence' => 6,
             'is_active' => 1
         ],
 
