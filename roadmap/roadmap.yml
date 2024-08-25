@@ -1,0 +1,32 @@
+setup:
+
+academicYear:
+Grades:
+Sections:
+  # columns: grade_id, Name, is_active
+  init
+  create section for each grade
+  CRUD in panel
+Subjects:
+  init:
+    migration
+    model
+    seeder
+
+teachers:
+  init
+  assign teacher to subjects
+
+week program:
+
+
+
+attends:
+
+
+exams:
+
+teacher auth:
+
+settings:
+translations:
