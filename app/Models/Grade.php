@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Grade onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Grade withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Grade withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Subject> $subjects
+ * @property-read int|null $subjects_count
  * @mixin \Eloquent
  */
 class Grade extends Model
@@ -71,6 +73,10 @@ class Grade extends Model
     public static function getBySequence(int $sequence): self
     {
         return self::where('sequence', $sequence)->firstOrFail();
+    }
+    public function students():HasMany
+    {
+        return $this->hasMany(Student::class);
     }
 
 

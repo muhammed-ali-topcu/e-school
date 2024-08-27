@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $name
@@ -32,6 +32,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Subject whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Subject withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Subject withoutTrashed()
+ * @property string|null $code
+ * @property-read \App\Models\Grade $grade
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject whereCode($value)
  * @mixin \Eloquent
  */
 class Subject extends Model

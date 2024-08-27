@@ -8,6 +8,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -40,27 +41,36 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Section extends Model
 {
-	use SoftDeletes;
-	protected $table = 'sections';
+    use SoftDeletes;
 
-	protected $casts = [
-		'grade_id' => 'int',
-		'is_active' => 'bool'
-	];
+    protected $table = 'sections';
 
-	protected $fillable = [
-		'name',
-		'grade_id',
-		'is_active'
-	];
+    protected $casts = [
+        'grade_id'  => 'int',
+        'is_active' => 'bool'
+    ];
+
+    protected $fillable = [
+        'name',
+        'grade_id',
+        'is_active'
+    ];
 
 
     public function scopeIsActive($query)
     {
         return $query->where('is_active', 1);
     }
-	public function grade()
-	{
-		return $this->belongsTo(Grade::class);
-	}
+
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class);
+    }
+
+
+    public function students(): HasMany
+    {
+        return $this->hasMany(Student::class);
+    }
+
 }
