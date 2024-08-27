@@ -23,5 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(AcademicYearSeeder::class);
         $this->call(GradeSeeder::class);
+        $this->call(SubjectSeeder::class);
     }
+
+
 }

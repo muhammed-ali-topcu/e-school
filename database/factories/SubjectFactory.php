@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Grade;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class SubjectFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name'        => $this->faker->name,
+            'is_active'   => $this->faker->boolean,
+            'description' => $this->faker->text,
+            'grade_id'    => Grade::inRandomOrder()->first()->id,
         ];
     }
 }

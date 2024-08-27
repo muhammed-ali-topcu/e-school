@@ -62,9 +62,15 @@ class Grade extends Model
     {
         return $this->hasMany(Section::class);
     }
+
     public function subjects(): HasMany
     {
         return $this->hasMany(Subject::class);
+    }
+
+    public static function getBySequence(int $sequence): self
+    {
+        return self::where('sequence', $sequence)->firstOrFail();
     }
 
 

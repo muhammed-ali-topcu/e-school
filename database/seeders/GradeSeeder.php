@@ -16,28 +16,11 @@ class GradeSeeder extends Seeder
             'name' => 'Hazırlık',
             'sequence' => 0,
             'is_active' => 1,
-            'subjects' => [
-                [
-                    'name' => 'Kuran-ı Kerîm (Kıraat)',
-                ],
-                [
-                    'name' => 'Kuran-ı Kerîm (Tecvit)',
-                ],
-                [
-                    'name' => 'Kuran-ı Kerîm (30.Cuz Ezber)',
-                ],
-            ]
         ],
         [
             'name' => 'Birinci',
             'sequence' => 1,
             'is_active' => 1,
-            'subjects' => [
-                [
-                    'name' => 'Sarf Nahiv',
-                    'description' => 'Sarf ve Nahiv konusunda sağlam bir temel atılacak. Arapçayı dil olarak sevecek.',
-                ],
-            ]
         ],
         [
             'name' => 'İkinci',
@@ -72,7 +55,6 @@ class GradeSeeder extends Seeder
     {
         foreach ($this->grades as $grade) {
             \App\Models\Grade::create($grade);
-
         }
     }
 }
