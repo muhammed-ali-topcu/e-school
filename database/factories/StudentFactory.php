@@ -26,7 +26,7 @@ class StudentFactory extends Factory
             'section_id' => $section->id,
             'is_active' => rand(0,1),
             'birth_date' => $this->faker->date(),
-            'enroll_date' => $this->faker->date(),
+            'enrollment_date' => $this->faker->date(),
         ];
     }
 }

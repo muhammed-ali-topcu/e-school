@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $section_id
  * @property int $is_active
  * @property string $birth_date
- * @property string $enroll_date
+ * @property string $enrollment_date
  * @property string|null $deleted_at
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -47,7 +47,7 @@ class Student extends Model
         'section_id',
         'is_active',
         'birth_date',
-        'enroll_date',
+        'enrollment_date',
     ];
 
     public function grade(): BelongsTo

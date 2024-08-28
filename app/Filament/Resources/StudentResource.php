@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\StudentResource\Pages;
 use App\Filament\Resources\StudentResource\RelationManagers;
+use App\Models\Section;
 use App\Models\Student;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -23,9 +24,31 @@ class StudentResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name'),
+                Forms\Components\TextInput::make('name')
+                    ->required(),
+
+                Forms\Components\Toggle::make('is_active')
+                    ->label(__('Active'))
+                    ->default(true)
+                    ->required(),
+
+                Forms\Components\DatePicker::make('birth_date')
+                    ->required(),
+
+                Forms\Components\DatePicker::make('enrollment_date')
+                    ->required(),
+
                 Forms\Components\Select::make('grade_id')
-                    ->relationship('grade', 'name')
+                    ->required()
+                    ->live()
+                    ->relationship('grade', 'name'),
+                Forms\Components\Select::make('section_id')
+                    ->required()
+                    ->options(function ($get) {
+                        return Section::where('grade_id', $get('grade_id'))->pluck('name', 'id');
+                    }),
+
+
             ]);
     }
 
@@ -37,7 +60,6 @@ class StudentResource extends Resource
                 Tables\Columns\TextColumn::make('grade.name')->searchable(),
                 Tables\Columns\TextColumn::make('section.name')->searchable(),
                 Tables\Columns\BooleanColumn::make('is_active'),
-
             ])
             ->filters([
             ])

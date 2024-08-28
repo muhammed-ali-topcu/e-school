@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->foreignIdFor(\App\Models\Section::class)->constrained()->cascadeOnDelete();
             $table->boolean('is_active');
             $table->date('birth_date');
-            $table->date('enroll_date');
+            $table->date('enrollment_date');
             $table->softDeletes();
             $table->timestamps();
         });

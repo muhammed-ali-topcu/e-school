@@ -15,7 +15,7 @@ Subjects:
     seeder
 
 Students:
-  # columns: name,grande_id,section_id,is_active,number,birth_date,enroll_date
+  # columns: name,grande_id,section_id,is_active,number,birth_date,enrollment_date
   init:
     migration
     model
