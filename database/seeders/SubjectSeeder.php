@@ -32,7 +32,6 @@ class SubjectSeeder extends Seeder
             'description' => 'Sarf ve Nahiv konusunda sağlam bir temel atılacak. Arapçayı dil olarak sevecek.',
         ],
 
-
     ];
 
     public function run(): void

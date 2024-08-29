@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasActiveScope;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -42,6 +43,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Section extends Model
 {
     use SoftDeletes;
+    use HasActiveScope;
 
     protected $table = 'sections';
 
@@ -56,11 +58,6 @@ class Section extends Model
         'is_active'
     ];
 
-
-    public function scopeIsActive($query)
-    {
-        return $query->where('is_active', 1);
-    }
 
     public function grade()
     {

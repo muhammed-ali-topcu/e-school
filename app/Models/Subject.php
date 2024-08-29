@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\HasActiveScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -41,6 +42,8 @@ class Subject extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use HasActiveScope;
+
 
     protected $fillable = ['name', 'description', 'is_active', 'grade_id'];
 
