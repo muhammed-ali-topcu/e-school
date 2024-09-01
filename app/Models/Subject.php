@@ -5,6 +5,10 @@ namespace App\Models;
 use App\Models\Traits\HasActiveScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -51,5 +55,26 @@ class Subject extends Model
     {
         return $this->belongsTo(Grade::class);
     }
+
+
+    public function teacher(): HasOneThrough
+    {
+        return $this->hasOneThrough(Teacher::class, SubjectTeacher::class);
+    }
+
+    public function subjectTeachers(): HasMany
+    {
+        return $this->hasMany(SubjectTeacher::class);
+    }
+
+    public function assignToTeacher(Teacher $teacher)
+    {
+        $this->subjectTeachers()->delete();
+
+        $this->subjectTeachers()->create([
+            'teacher_id' => $teacher->id,
+        ]);
+    }
+
 
 }
