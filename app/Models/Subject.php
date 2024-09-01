@@ -59,7 +59,7 @@ class Subject extends Model
 
     public function teacher(): HasOneThrough
     {
-        return $this->hasOneThrough(Teacher::class, SubjectTeacher::class);
+        return $this->hasOneThrough(Teacher::class, SubjectTeacher::class, 'subject_id', 'id', 'id', 'teacher_id');
     }
 
     public function subjectTeachers(): HasMany

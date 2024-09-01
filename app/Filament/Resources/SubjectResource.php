@@ -6,8 +6,10 @@ use App\Filament\Resources\SubjectResource\Pages;
 use App\Filament\Resources\SubjectResource\RelationManagers;
 use App\Models\Grade;
 use App\Models\Subject;
+use App\Models\Teacher;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -41,6 +43,7 @@ class SubjectResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')->searchable(),
                 Tables\Columns\TextColumn::make('grade.name')->searchable(),
+                Tables\Columns\TextColumn::make('teacher.name')->searchable(),
                 Tables\Columns\BooleanColumn::make('is_active'),
 
             ])
@@ -48,8 +51,26 @@ class SubjectResource extends Resource
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('assign_teacher')
+                    ->form(function ($record) {
+                        return [
+                            Forms\Components\Select::make('teacher_id')
+                                ->options(Teacher::active()->pluck('name', 'id'))
+                                ->default($record->teacher?->id)
+                                ->label(__('Teacher'))
+                                ->required()
+                        ];
+                    })
+                    ->action(function (Subject $record, $data) {
+                        $record->assignToTeacher(Teacher::findOrFail($data['teacher_id']));
+                        Notification::make()
+                            ->title(__('Teacher assigned successfully!'))
+                            ->success()
+                            ->send();
+                        return true;
+                    }),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
