@@ -45,7 +45,7 @@ return [
 
     'messages' => [
 
-        'failed' => 'Bu kimlik bilgileri kayıtlarımızla eşleşmiyor.',
+        'failed' => 'Verilen bilgiler kayıtlarımızla eşleşmiyor.',
 
     ],
 
