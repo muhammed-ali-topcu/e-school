@@ -20,6 +20,17 @@ class SectionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+
+    public static function getPluralLabel(): string {
+        return __('Sections');
+    }
+
+    public static function getLabel(): string
+    {
+        return __('Section');
+    }
+
+
     public static function form(Form $form): Form
     {
         return $form

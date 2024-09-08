@@ -20,6 +20,16 @@ class StudentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getPluralLabel(): string
+    {
+        return __('Students');
+    }
+
+    public static function getLabel(): string
+    {
+        return __('Student');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

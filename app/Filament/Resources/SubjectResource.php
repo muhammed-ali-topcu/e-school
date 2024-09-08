@@ -22,6 +22,17 @@ class SubjectResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+ 
+    public static function getPluralLabel(): string
+    {
+        return __('Subjects');
+    }
+    public static function getLabel(): ?string
+    {
+        return __('Subject');
+    }
+
+
     public static function form(Form $form): Form
     {
         return $form
