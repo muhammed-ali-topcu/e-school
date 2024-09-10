@@ -80,12 +80,12 @@ class User extends Authenticatable implements FilamentUser
     {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            'password'          => 'hashed',
         ];
     }
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasRole('superAdmin')  && $this->hasVerifiedEmail();
+        return $this->hasRole('superAdmin') && $this->hasVerifiedEmail();
     }
 }
