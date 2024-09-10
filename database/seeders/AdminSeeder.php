@@ -18,9 +18,9 @@ class AdminSeeder extends Seeder
     {
 
         $superAdmin = User::updateOrCreate([
-            'email' => 'super.admin@test.com',
-            'name' => 'Super Admin',
-            'password' => 'password',
+            'email'             => 'super.admin@test.com',
+            'name'              => 'Super Admin',
+            'password'          => 'password',
             'email_verified_at' => Carbon::now(),
         ]);
         $superAdmin->assignRole(Role::findByName('superAdmin'));
