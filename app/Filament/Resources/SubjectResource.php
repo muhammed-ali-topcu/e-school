@@ -22,7 +22,7 @@ class SubjectResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
- 
+
     public static function getPluralLabel(): string
     {
         return __('Subjects');
@@ -38,13 +38,18 @@ class SubjectResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('Name'))
                     ->required(),
                 Forms\Components\Select::make('grade_id')
                     ->required()
                     ->label(__('Grade'))
                     ->options(Grade::active()->pluck('name', 'id')),
-                Forms\Components\Textarea::make('description')->nullable(),
-                Forms\Components\Toggle::make('is_active')->default(true),
+                Forms\Components\Textarea::make('description')
+                    ->label(__('Description'))
+                    ->nullable(),
+                Forms\Components\Toggle::make('is_active')
+                    ->label(__('Active'))
+                    ->default(true),
             ]);
     }
 
@@ -52,11 +57,17 @@ class SubjectResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('grade.name')->searchable(),
-                Tables\Columns\TextColumn::make('teacher.name')->searchable(),
-                Tables\Columns\BooleanColumn::make('is_active'),
-
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('Name'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('grade.name')
+                    ->label(__('Grade'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('teacher.name')
+                    ->label(__('Teacher'))
+                    ->searchable(),
+                Tables\Columns\BooleanColumn::make('is_active')
+                    ->label(__('Active')),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
@@ -64,6 +75,7 @@ class SubjectResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\Action::make('assign_teacher')
+                    ->label(__('Assign teacher'))
                     ->form(function ($record) {
                         return [
                             Forms\Components\Select::make('teacher_id')

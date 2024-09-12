@@ -36,12 +36,15 @@ class GradeResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('Name'))
                     ->required(),
                 Forms\Components\TextInput::make('sequence')
+                    ->label(__('Sequence'))
                     ->required()
                     ->numeric()
                     ->gte(0),
                 Forms\Components\Toggle::make('is_active')
+                    ->label(__('Active'))
                     ->default(true)
             ]);
     }
@@ -50,9 +53,15 @@ class GradeResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('sequence')->searchable()->sortable(),
-                Tables\Columns\BooleanColumn::make('is_active'),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable()
+                    ->label(__('Name')),
+                Tables\Columns\TextColumn::make('sequence')
+                    ->label(__('Sequence'))
+                    ->searchable()
+                    ->sortable(),
+                Tables\Columns\BooleanColumn::make('is_active')
+                    ->label(__('Active')),
             ])
             ->filters([
                 //

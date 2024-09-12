@@ -34,8 +34,10 @@ class TeacherResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('Name'))
                     ->required(),
                 Forms\Components\Toggle::make('is_active')
+                    ->label(__('Active'))
                     ->default(true)
 
             ]);
@@ -45,8 +47,11 @@ class TeacherResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\BooleanColumn::make('is_active'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('Name'))
+                    ->searchable(),
+                Tables\Columns\BooleanColumn::make('is_active')
+                    ->label(__('Active')),
             ])
             ->filters([
                 //

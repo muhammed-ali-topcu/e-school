@@ -35,6 +35,7 @@ class StudentResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label(__('Name'))
                     ->required(),
 
                 Forms\Components\Toggle::make('is_active')
@@ -43,22 +44,24 @@ class StudentResource extends Resource
                     ->required(),
 
                 Forms\Components\DatePicker::make('birth_date')
+                    ->label(__('Birth Date'))
                     ->required(),
 
                 Forms\Components\DatePicker::make('enrollment_date')
+                    ->label(__('Enrollment Date'))
                     ->required(),
 
                 Forms\Components\Select::make('grade_id')
+                    ->label(__('Grade'))
                     ->required()
                     ->live()
                     ->relationship('grade', 'name'),
                 Forms\Components\Select::make('section_id')
+                    ->label(__('Section'))
                     ->required()
                     ->options(function ($get) {
                         return Section::where('grade_id', $get('grade_id'))->pluck('name', 'id');
                     }),
-
-
             ]);
     }
 
@@ -66,10 +69,17 @@ class StudentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('grade.name')->searchable(),
-                Tables\Columns\TextColumn::make('section.name')->searchable(),
-                Tables\Columns\BooleanColumn::make('is_active'),
+                Tables\Columns\TextColumn::make('name')
+                    ->label(__('Name'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('grade.name')
+                    ->label(__('Grade'))
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('section.name')
+                    ->label(__('Section'))
+                    ->searchable(),
+                Tables\Columns\BooleanColumn::make('is_active')
+                    ->label(__('Active')),
             ])
             ->filters([
             ])
