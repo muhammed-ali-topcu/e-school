@@ -1,0 +1,21 @@
+{
+    "Active": "Aktif",
+    "Assign teacher": "Öğretmen ata",
+    "auth.password": "şifre",
+    "Birth Date": "Doğum Tarihi",
+    "Description": "Açıklama",
+    "Enrollment Date": "Kayıt Tarihi",
+    "Grade": "Sınıf",
+    "Grades": "Sınıflar",
+    "Name": "İsim",
+    "Section": "Şube",
+    "Sections": "Şubeler",
+    "Sequence": "Sıra",
+    "Student": "Öğrenci",
+    "Students": "Öğrenciler",
+    "Subject": "Ders",
+    "Subjects": "Dersler",
+    "Teacher": "Öğretmen",
+    "Teacher assigned successfully!": "Öğretmen atama yapıldı!",
+    "Teachers": "Öğretmenler"
+}
