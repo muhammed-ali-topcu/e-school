@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\BelongsToThrough;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $day
@@ -45,6 +46,7 @@ class WeekProgram extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    use BelongsToThrough;
 
     protected $fillable = [
         'day',
@@ -59,6 +61,13 @@ class WeekProgram extends Model
     {
         return $this->belongsTo(Section::class);
     }
+
+    public function grade()
+    {
+        return $this->belongsTo(Grade::class)->join('sections', 'sections.grade_id', '=', 'grades.id')
+            ->where('sections.id', '=', $this->section_id);
+    }
+
 
     public function subject(): BelongsTo
     {
