@@ -32,6 +32,9 @@ teachers:
   assign teacher to subjects
 
 week program:
+  #columns: section_id,subject_id,day,time
+  init
+
 
 
 

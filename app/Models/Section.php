@@ -10,6 +10,7 @@ use App\Models\Traits\HasActiveScope;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -38,6 +39,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Section whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Section withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Section withoutTrashed()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Student> $students
+ * @property-read int|null $students_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Section active()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Subject> $subjects
+ * @property-read int|null $subjects_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WeekProgram> $weekPrograms
+ * @property-read int|null $week_programs_count
  * @mixin \Eloquent
  */
 class Section extends Model
@@ -64,10 +72,20 @@ class Section extends Model
         return $this->belongsTo(Grade::class);
     }
 
+    public function subjects(): HasManyThrough
+    {
+        return $this->hasManyThrough(Subject::class, Grade::class, 'id', 'grade_id', 'id', 'id');
+    }
+
 
     public function students(): HasMany
     {
         return $this->hasMany(Student::class);
+    }
+
+    public function weekPrograms(): HasMany
+    {
+        return $this->hasMany(WeekProgram::class);
     }
 
 }
