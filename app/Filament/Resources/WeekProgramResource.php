@@ -7,9 +7,11 @@ use App\Helpers\Settings;
 use App\Models\Section;
 use App\Models\Subject;
 use App\Models\WeekProgram;
+use App\Rules\UniqueWeekProgramTime;
 use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Actions\BulkActionGroup;
@@ -46,7 +48,7 @@ class WeekProgramResource extends Resource
                     ->required()
                     ->options(function ($get) {
                         $section = Section::find($get('section_id'));
-                        return Subject::where('grade_id', $section->grade_id)->pluck('name', 'id');
+                        return Subject::where('grade_id', $section?->grade_id)->pluck('name', 'id');
                     }),
 
                 Forms\Components\Select::make('day_index')
@@ -55,6 +57,13 @@ class WeekProgramResource extends Resource
                     ->label(__('Day')),
 
                 Forms\Components\TimePicker::make('start_time')
+                    ->rules([
+                        fn(Get $get): UniqueWeekProgramTime => new UniqueWeekProgramTime(
+                            $get('section_id'),
+                            $get('day_index'),
+                            $get('id') // This will be null for new records and set for existing ones
+                        ),
+                    ])
                     ->required()
                     ->label(__('Time')),
             ]);

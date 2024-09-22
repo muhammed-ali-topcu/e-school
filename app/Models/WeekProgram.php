@@ -53,7 +53,7 @@ class WeekProgram extends Model
     use BelongsToThrough;
 
     protected $fillable = [
-        'day',
+        'day_index',
         'start_time',
         'end_time',
         'section_id',
