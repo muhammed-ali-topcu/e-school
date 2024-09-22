@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $name
@@ -40,6 +40,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $code
  * @property-read \App\Models\Grade $grade
  * @method static \Illuminate\Database\Eloquent\Builder|Subject whereCode($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\SubjectTeacher> $subjectTeachers
+ * @property-read int|null $subject_teachers_count
+ * @property-read \App\Models\Teacher|null $teacher
+ * @method static \Illuminate\Database\Eloquent\Builder|Subject active()
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WeekProgram> $weekPrograms
+ * @property-read int|null $week_programs_count
  * @mixin \Eloquent
  */
 class Subject extends Model
@@ -55,7 +61,6 @@ class Subject extends Model
     {
         return $this->belongsTo(Grade::class);
     }
-
 
     public function teacher(): HasOneThrough
     {
@@ -74,6 +79,11 @@ class Subject extends Model
         $this->subjectTeachers()->create([
             'teacher_id' => $teacher->id,
         ]);
+    }
+
+    public function weekPrograms(): HasMany
+    {
+        return $this->hasMany(WeekProgram::class);
     }
 
 

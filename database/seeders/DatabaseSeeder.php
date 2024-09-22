@@ -5,6 +5,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Env;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +15,9 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->_runEssentialSeeders();
-        $this->_runOptionalSeeders();
+        if (app()->environment(['local', 'development'])) {
+            $this->_runOptionalSeeders();
+        }
 
     }
 
@@ -32,6 +35,7 @@ class DatabaseSeeder extends Seeder
         $this->call(StudentSeeder::class);
         $this->call(TeacherSeeder::class);
         $this->call(SubjectTeacherSeeder::class);
+        $this->call(WeekProgramSeeder::class);
     }
 
 
