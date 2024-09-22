@@ -1,0 +1,49 @@
+setup:
+
+academicYear:
+Grades:
+Sections:
+  # columns: grade_id, Name, is_active
+  init
+  create section for each grade
+  CRUD in panel
+Subjects:
+  # columns: grade_id, Name, is_active,description
+  init:
+    migration
+    model
+    seeder
+
+Students:
+  # columns: name,grande_id,section_id,is_active,number,birth_date,enrollment_date
+  init:
+    migration
+    model
+    seeder & factory
+  crud:
+
+
+
+
+teachers:
+  #columns: name,is_active
+  init
+  CRUD
+  assign teacher to subjects
+
+week program:
+  #columns: section_id,subject_id,day_index,time
+  init
+attends:
+
+teacher auth:
+
+exams:
+
+settings:
+translations:
+spatie model activity log
+telescope package
+log viewer
+horizon
+
