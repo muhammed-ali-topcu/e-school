@@ -18,7 +18,7 @@ class SubjectFactory extends Factory
     public function definition(): array
     {
         return [
-            'name'        => $this->faker->name,
+            'name'        => $this->faker->sentence(rand(2,4)),
             'is_active'   => $this->faker->boolean,
             'description' => $this->faker->text,
             'grade_id'    => Grade::inRandomOrder()->first()->id,

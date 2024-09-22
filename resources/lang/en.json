@@ -3,10 +3,13 @@
     "Assign teacher": "Assign teacher",
     "auth.password": "auth.password",
     "Birth Date": "Birth Date",
+    "Day": "Day",
     "Description": "Description",
     "Enrollment Date": "Enrollment Date",
+    "Friday": "Friday",
     "Grade": "Grade",
     "Grades": "Grades",
+    "Monday": "Monday",
     "Name": "Name",
     "Section": "Section",
     "Sections": "Sections",
@@ -17,5 +20,12 @@
     "Subjects": "Subjects",
     "Teacher": "Teacher",
     "Teacher assigned successfully!": "Teacher assigned successfully!",
-    "Teachers": "Teachers"
+    "Teachers": "Teachers",
+    "There is already a program scheduled at this time for the selected section and day.": "There is already a program scheduled at this time for the selected section and day.",
+    "Thursday": "Thursday",
+    "Time": "Time",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Week Program": "Week Program",
+    "Week Programs": "Week Programs"
 }

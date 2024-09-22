@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Settings;
 use App\Models\Traits\BelongsToThrough;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -40,6 +41,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|WeekProgram onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WeekProgram withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WeekProgram withoutTrashed()
+ * @property int $day_index
+ * @property-read \App\Models\Grade|null $grade
+ * @method static \Illuminate\Database\Eloquent\Builder|WeekProgram whereDayIndex($value)
  * @mixin \Eloquent
  */
 class WeekProgram extends Model
@@ -49,7 +53,7 @@ class WeekProgram extends Model
     use BelongsToThrough;
 
     protected $fillable = [
-        'day',
+        'day_index',
         'start_time',
         'end_time',
         'section_id',
@@ -72,5 +76,9 @@ class WeekProgram extends Model
     public function subject(): BelongsTo
     {
         return $this->belongsTo(Subject::class);
+    }
+    public function getDayNameAttribute():string
+    {
+        return Settings::getDayNameByIndex($this->day_index);
     }
 }

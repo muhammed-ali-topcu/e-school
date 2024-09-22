@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\Settings;
 use App\Models\Section;
 use App\Models\WeekProgram;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class WeekProgramSeeder extends Seeder
@@ -16,12 +16,12 @@ class WeekProgramSeeder extends Seeder
     {
         $sections = Section::all();
         foreach ($sections as $section) {
-            foreach (config('settings.study_days') as $day) {
-                foreach (config('settings.study_times') as $time) {
+            foreach (Settings::getStudyDays() as $dayIndex => $dayName) {
+                foreach (Settings::getStudyTimes() as $time) {
                     WeekProgram::updateOrCreate([
                         'section_id' => $section->id,
                         'subject_id' => $section->subjects()->inRandomOrder()->first()->id,
-                        'day'        => $day,
+                        'day_index'  => $dayIndex,
                         'start_time' => $time
                     ]);
                 }

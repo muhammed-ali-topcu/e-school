@@ -1,12 +1,15 @@
 {
     "Active": "Aktif",
     "Assign teacher": "Öğretmen ata",
-    "auth.password": "şifre",
+    "auth.password": "Şifre",
     "Birth Date": "Doğum Tarihi",
+    "Day": "Gün",
     "Description": "Açıklama",
     "Enrollment Date": "Kayıt Tarihi",
+    "Friday": "Cuma",
     "Grade": "Sınıf",
     "Grades": "Sınıflar",
+    "Monday": "Pazartesi",
     "Name": "İsim",
     "Section": "Şube",
     "Sections": "Şubeler",
@@ -16,6 +19,13 @@
     "Subject": "Ders",
     "Subjects": "Dersler",
     "Teacher": "Öğretmen",
-    "Teacher assigned successfully!": "Öğretmen atama yapıldı!",
-    "Teachers": "Öğretmenler"
+    "Teacher assigned successfully!": "Öğretmen ataması başarılı!",
+    "Teachers": "Öğretmenler",
+    "There is already a program scheduled at this time for the selected section and day.": "Seçilen şube ve gün için bu saatte zaten bir program planlanmış.",
+    "Thursday": "Perşembe",
+    "Time": "Saat",
+    "Tuesday": "Salı",
+    "Wednesday": "Çarşamba",
+    "Week Program": "Haftalık Program",
+    "Week Programs": "Haftalık Programlar"
 }

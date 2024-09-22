@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -55,7 +55,7 @@ class Grade extends Model
     {
         parent::boot();
         self::created(function (self $grade) {
-            $grade->sections()->save(new Section(['name' => 'A']));
+            $grade->sections()->save(new Section(['name' => "{$grade->name} - A"]));
         });
     }
 
@@ -73,7 +73,8 @@ class Grade extends Model
     {
         return self::where('sequence', $sequence)->firstOrFail();
     }
-    public function students():HasMany
+
+    public function students(): HasMany
     {
         return $this->hasMany(Student::class);
     }
