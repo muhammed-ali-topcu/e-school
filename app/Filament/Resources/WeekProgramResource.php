@@ -17,7 +17,7 @@ class WeekProgramResource extends Resource
 {
     protected static ?string $model = WeekProgram::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar';
 
     public static function getPluralLabel(): string
     {

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $day
@@ -40,6 +40,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|WeekProgram onlyTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WeekProgram withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|WeekProgram withoutTrashed()
+ * @property int $day_index
+ * @property-read \App\Models\Grade|null $grade
+ * @method static \Illuminate\Database\Eloquent\Builder|WeekProgram whereDayIndex($value)
  * @mixin \Eloquent
  */
 class WeekProgram extends Model

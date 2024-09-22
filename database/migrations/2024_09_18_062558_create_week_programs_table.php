@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('week_programs', function (Blueprint $table) {
             $table->id();
-            $table->string('day');
+            $table->unsignedTinyInteger('day_index');
             $table->time('start_time');
             $table->time('end_time')->nullable();
             $table->foreignIdFor(\App\Models\Section::class)->constrained()->cascadeOnDelete();
