@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('grades', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->json('name');
             $table->integer('sequence');
             $table->boolean('is_active')->default(true);
             $table->softDeletes();

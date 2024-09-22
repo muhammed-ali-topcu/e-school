@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
 
 /**
  *
@@ -46,10 +47,12 @@ class Grade extends Model
     use HasFactory;
     use SoftDeletes;
     use HasActiveScope;
+    use HasTranslations;
 
     protected $fillable = [
         'name', 'is_active', 'sequence'
     ];
+    public $translatable = ['name'];
 
     protected static function boot()
     {

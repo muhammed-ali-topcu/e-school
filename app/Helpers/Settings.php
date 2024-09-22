@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use http\Exception\InvalidArgumentException;
+
 class Settings
 {
     public static function getStudyDays(): array
@@ -21,7 +23,6 @@ class Settings
     }
 
     public static function getStudyTimes(): array
-
     {
         return [
             '07:00:00',
@@ -33,9 +34,8 @@ class Settings
             '14:00:00',
             '15:00:00',
             '16:00:00',
-
         ];
-
     }
+
 
 }

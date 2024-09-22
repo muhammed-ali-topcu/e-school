@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Grade;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -10,51 +11,54 @@ class GradeSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-
-    private array $grades = [
+    private array $gradesInfo = [
         [
-            'name' => 'Hazırlık',
-            'sequence' => 0,
+            'name'      => ['en' => 'Preparatory', 'tr' => 'Hazırlık', 'ar' => 'تحضيري'],
+            'sequence'  => 0,
             'is_active' => 1,
         ],
         [
-            'name' => 'Birinci',
-            'sequence' => 1,
+            'name'      => ['en' => 'First', 'tr' => 'Birinci', 'ar' => 'الأول'],
+            'sequence'  => 1,
             'is_active' => 1,
         ],
         [
-            'name' => 'İkinci',
-            'sequence' => 2,
-            'is_active' => 1
+            'name'      => ['en' => 'Second', 'tr' => 'İkinci', 'ar' => 'الثاني'],
+            'sequence'  => 2,
+            'is_active' => 1,
         ],
         [
-            'name' => 'Üçüncü',
-            'sequence' => 3,
-            'is_active' => 1
+            'name'      => ['en' => 'Third', 'tr' => 'Üçüncü', 'ar' => 'الثالث'],
+            'sequence'  => 3,
+            'is_active' => 1,
         ],
         [
-            'name' => 'Dördüncü',
-            'sequence' => 4,
-            'is_active' => 1
+            'name'      => ['en' => 'Fourth', 'tr' => 'Dördüncü', 'ar' => 'الرابع'],
+            'sequence'  => 4,
+            'is_active' => 1,
         ],
         [
-            'name' => 'Besinci',
-            'sequence' => 5,
-            'is_active' => 1
+            'name'      => ['en' => 'Fifth', 'tr' => 'Beşinci', 'ar' => 'الخامس'],
+            'sequence'  => 5,
+            'is_active' => 1,
         ],
         [
-            'name' => 'Ihtisas',
-            'sequence' => 6,
-            'is_active' => 1
+            'name'      => ['en' => 'Specialization', 'tr' => 'İhtisas', 'ar' => 'التخصص'],
+            'sequence'  => 6,
+            'is_active' => 1,
         ],
-
-
     ];
+
 
     public function run(): void
     {
-        foreach ($this->grades as $grade) {
-            \App\Models\Grade::create($grade);
+        foreach ($this->gradesInfo as $gradeInfo) {
+            $grade = new Grade($gradeInfo);
+            $grade->setTranslation('name', 'en', $gradeInfo['name']['en']);
+            $grade->setTranslation('name', 'tr', $gradeInfo['name']['tr']);
+            $grade->setTranslation('name', 'ar', $gradeInfo['name']['ar']);
+            $grade->save();
+
         }
     }
 }
