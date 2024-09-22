@@ -32,22 +32,18 @@ teachers:
   assign teacher to subjects
 
 week program:
-  #columns: section_id,subject_id,day,time
+  #columns: section_id,subject_id,day_index,time
   init
-
-
-
-
 attends:
 
+teacher auth:
 
 exams:
-
-teacher auth:
 
 settings:
 translations:
 spatie model activity log
 telescope package
 log viewer
+horizon
 
