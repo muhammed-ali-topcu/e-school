@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\Settings;
 use App\Models\Traits\BelongsToThrough;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $day
@@ -75,5 +76,9 @@ class WeekProgram extends Model
     public function subject(): BelongsTo
     {
         return $this->belongsTo(Subject::class);
+    }
+    public function getDayNameAttribute():string
+    {
+        return Settings::getDayNameByIndex($this->day_index);
     }
 }

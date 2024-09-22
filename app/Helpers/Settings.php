@@ -15,6 +15,11 @@ class Settings
         ];
     }
 
+    public static function getDayNameByIndex(int $index)
+    {
+        return self::getStudyDays()[$index] ?? null;
+    }
+
     public static function getStudyTimes(): array
 
     {
