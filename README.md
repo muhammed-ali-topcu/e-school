@@ -7,7 +7,7 @@ school management system usgin php, laravel,mysql database,filament.
 - CRUD teachers and students
 - assign lessons to teachers
 - manage week program.
-> CRUD: stands for create, Read, update, delete.
+> CRUD: stands for create, read, update, delete.
 
 
 ## Installation (using doker /laravel sail)
