@@ -1,7 +1,13 @@
 e-school:
 ===============================
-school management system usgin laravel, filament 
+school management system usgin php, laravel,mysql database,filament.
 
+## features:
+- CRUD grades,sectios and lessons.
+- CRUD teachers and students
+- assign lessons to teachers
+- manage week program.
+> CRUD: stands for create, Read, update, delete.
 
 
 ## Installation (using doker /laravel sail)
