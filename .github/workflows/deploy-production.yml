@@ -1,8 +1,8 @@
-name: Deploy to preprod server
+name: Deploy to pro server
 
 on:
   push:
-    branches: [preprod]
+    branches: [master]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,18 +26,9 @@ jobs:
           script_stop: true
           script: |
             cd domains
-            cd e-school-preprod.nicesoft.me/
+            cd e-school-prod.nicesoft.me/
             git pull
             php artisan optimize:clear
             php ~/composer.phar install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
             php artisan optimize
-            php artisan migrate:fresh --seed --force
-      # - name: Install SSH key
-      #   run: |
-      #     mkdir -p ~/.ssh/
-      #     echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
-      #     chmod 600 ~/.ssh/id_rsa
-      #     ssh-keyscan -t rsa -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-      # - name: Copy Build Files to Target Server
-      #   run: |
-      #     rsync -r -e "ssh -p ${{ secrets.SSH_PORT }}" ${{ github.workspace }}/public/build/ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:~/domains/laravel-space.com/public/build
+            php artisan migrate --force
