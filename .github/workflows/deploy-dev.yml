@@ -1,4 +1,4 @@
-name: Deploy to Development Server
+name: Deploy to development server
 
 on:
   push:
@@ -11,9 +11,9 @@ jobs:
         with:
           php-version: '8.2'
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
+      # - uses: actions/setup-node@v3
+      #   with:
+      #     node-version: 16
       - name: Copy .env
         run: cp .env.example .env
       - name: Install composer Dependencies
@@ -36,7 +36,6 @@ jobs:
             cd domains
             cd e-school-dev.nicesoft.me/
             git pull
-            php artisan optimize:clear
             php ~/composer.phar install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
             php artisan optimize
             php artisan migrate:fresh --seed --force
