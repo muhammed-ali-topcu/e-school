@@ -1,4 +1,4 @@
-name: HostingerDeploy
+name: Hostinger Deploy
 
 on:
   push:
@@ -39,7 +39,7 @@ jobs:
             php artisan optimize:clear
             php ~/composer.phar install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
             php artisan optimize
-            php artisan migrate --force
+            php artisan migrate:fresh --seed --force
       # - name: Install SSH key
       #   run: |
       #     mkdir -p ~/.ssh/
