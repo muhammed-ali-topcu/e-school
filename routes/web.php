@@ -17,4 +17,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('grades', GradeController::class);
 });
 
+Route::get('/env', function () {
+
+     return app()->environment();
+
+});
+
 require __DIR__.'/auth.php';
