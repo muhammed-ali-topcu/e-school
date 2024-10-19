@@ -36,7 +36,10 @@ jobs:
             cd domains
             cd e-school-dev.nicesoft.me/
             git pull
-            php composer.phar install
+            php ~/composer.phar install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+            php artisan config:clear
+            php artisan cache:clear
+            php artisan key:generate
             php artisan migrate --force
       # - name: Install SSH key
       #   run: |
