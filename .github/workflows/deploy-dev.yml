@@ -35,8 +35,8 @@ jobs:
           script: |
             cd domains
             cd e-school-dev.nicesoft.me/
-            git pull
             php artisan optimize:clear
+            git pull
             php ~/composer.phar install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
             php artisan optimize
             php artisan migrate:fresh --seed --force
