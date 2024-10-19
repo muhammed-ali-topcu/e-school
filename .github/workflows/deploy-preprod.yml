@@ -1,4 +1,4 @@
-name: Hostinger Deploy
+name: Deploy to Development Server
 
 on:
   push:
