@@ -39,9 +39,10 @@ class Teacher extends Model
     use HasActiveScope;
 
     protected $fillable = [
-        'name',
-        'is_active',
-        'user_id'
+        'user_id',
+        'specialty',
+        'phone',
+        'address',
     ];
 
     public function user()

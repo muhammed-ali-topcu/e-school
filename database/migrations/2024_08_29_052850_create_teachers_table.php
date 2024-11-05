@@ -14,11 +14,12 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->boolean('is_active')->default(1);
-            $table->softDeletes();
+            $table->string('specialty')->nullable();
             $table->foreignIdFor(User::class)->nullable()->constrained()->nullOnDelete();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullalbe();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

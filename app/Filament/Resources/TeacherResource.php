@@ -6,10 +6,13 @@ use App\Filament\Resources\TeacherResource\Pages;
 
 use App\Models\Teacher;
 use Filament\Forms;
+use Filament\Forms\Components\Fieldset;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Hash;
 
 class TeacherResource extends Resource
 {
@@ -31,17 +34,42 @@ class TeacherResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label(__('Name'))
-                    ->required(),
 
-                Forms\Components\Toggle::make('is_active')
-                    ->label(__('Active'))
-                    ->default(true),
+                Fieldset::make('User')
+                    ->relationship('user')
+                    ->label(__('Essential Info'))
+                    ->schema([
+                        TextInput::make('name')
+                            ->label(__('Name'))
+                            ->required(),
 
-                Forms\Components\TextInput::make('user.email')
-                    ->label(__('Name'))
-                    ->required(),
+                        TextInput::make('email')
+                            ->label(__('Email'))
+                            ->email()
+                            ->required(),
+
+                        TextInput::make('password')
+                            ->label(__('Password') . ' (' . __('Leave empty if you don\'t want to change') . ')')
+                            ->dehydrateStateUsing(fn($state) => Hash::make($state))
+                            ->dehydrated(fn($state) => filled($state))
+                            ->required(fn(string $context): bool => $context === 'create'),
+
+                        Forms\Components\Toggle::make('is_active')
+                            ->label(__('Active'))
+                            ->default(true),
+
+                    ]),
+                Forms\Components\TextInput::make('specialty')
+                    ->label(__('Specialty'))
+                    ->nullable(),
+
+                Forms\Components\TextInput::make('phone')
+                    ->label(__('Phone'))
+                    ->nullable(),
+
+                Forms\Components\Textarea::make('address')
+                    ->label(__('Address'))
+                    ->nullable(),
 
             ]);
     }
@@ -50,23 +78,24 @@ class TeacherResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextColumn::make('user.name')
                     ->label(__('Name'))
                     ->searchable(),
-                Tables\Columns\BooleanColumn::make('is_active')
+                Tables\Columns\TextColumn::make('user.email')
+                    ->label(__('Email'))
+                    ->searchable(),
+                Tables\Columns\BooleanColumn::make('user.is_active')
                     ->label(__('Active')),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-
-                ]),
+                Tables\Actions\BulkActionGroup::make([]),
             ]);
     }
 
