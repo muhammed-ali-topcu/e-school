@@ -43,6 +43,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutRole($roles, $guard = null)
+ * @property-read bool $is_super_admin
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail

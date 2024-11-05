@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -50,7 +50,6 @@ class Student extends Model
     use SoftDeletes;
     use HasActiveScope;
 
-
     protected $fillable = [
         'name',
         'grade_id',
@@ -58,6 +57,11 @@ class Student extends Model
         'is_active',
         'birth_date',
         'enrollment_date',
+        'guardian_name',
+        'guardian_phone',
+        'phone',
+        'address',
+
     ];
 
     public function grade(): BelongsTo
