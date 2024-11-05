@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -38,10 +38,14 @@ class Teacher extends Model
     use SoftDeletes;
     use HasActiveScope;
 
-
     protected $fillable = [
         'name',
         'is_active',
+        'user_id'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
