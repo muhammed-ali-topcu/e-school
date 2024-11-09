@@ -27,6 +27,10 @@ class StudentFactory extends Factory
             'is_active' => rand(0,1),
             'birth_date' => $this->faker->date(),
             'enrollment_date' => $this->faker->date(),
+            'phone' => $this->faker->phoneNumber(),
+            'guardian_name' => $this->faker->name(),
+            'guardian_phone' => $this->faker->phoneNumber(),
+            'address' => $this->faker->address(),
         ];
     }
 }

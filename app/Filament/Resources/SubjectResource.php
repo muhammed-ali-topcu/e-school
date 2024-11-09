@@ -3,18 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SubjectResource\Pages;
-use App\Filament\Resources\SubjectResource\RelationManagers;
 use App\Models\Grade;
 use App\Models\Subject;
-use App\Models\Teacher;
 use Filament\Forms;
 use Filament\Forms\Form;
-use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+
 
 class SubjectResource extends Resource
 {
@@ -63,41 +59,13 @@ class SubjectResource extends Resource
                 Tables\Columns\TextColumn::make('grade.name')
                     ->label(__('Grade'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('teacher.name')
-                    ->label(__('Teacher'))
-                    ->searchable(),
                 Tables\Columns\BooleanColumn::make('is_active')
                     ->label(__('Active')),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\Action::make('assign_teacher')
-                    ->label(__('Assign teacher'))
-                    ->form(function ($record) {
-                        return [
-                            Forms\Components\Select::make('teacher_id')
-                                ->options(Teacher::active()->pluck('name', 'id'))
-                                ->default($record->teacher?->id)
-                                ->label(__('Teacher'))
-                                ->required()
-                        ];
-                    })
-                    ->action(function (Subject $record, $data) {
-                        $record->assignToTeacher(Teacher::findOrFail($data['teacher_id']));
-                        Notification::make()
-                            ->title(__('Teacher assigned successfully!'))
-                            ->success()
-                            ->send();
-                        return true;
-                    }),
-
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                ]),
+                Tables\Actions\BulkActionGroup::make([]),
             ]);
     }
 
@@ -116,6 +84,4 @@ class SubjectResource extends Resource
             'edit'   => Pages\EditSubject::route('/{record}/edit'),
         ];
     }
-
-
 }

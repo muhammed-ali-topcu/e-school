@@ -42,6 +42,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Student whereEnrollmentDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Student withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Student withoutTrashed()
+ * @property string|null $phone
+ * @property string $guardian_name
+ * @property string $guardian_phone
+ * @property string|null $address
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereGuardianName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereGuardianPhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student wherePhone($value)
  * @mixin \Eloquent
  */
 class Student extends Model
@@ -50,7 +58,6 @@ class Student extends Model
     use SoftDeletes;
     use HasActiveScope;
 
-
     protected $fillable = [
         'name',
         'grade_id',
@@ -58,6 +65,11 @@ class Student extends Model
         'is_active',
         'birth_date',
         'enrollment_date',
+        'guardian_name',
+        'guardian_phone',
+        'phone',
+        'address',
+
     ];
 
     public function grade(): BelongsTo

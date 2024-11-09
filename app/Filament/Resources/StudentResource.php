@@ -62,6 +62,28 @@ class StudentResource extends Resource
                     ->options(function ($get) {
                         return Section::where('grade_id', $get('grade_id'))->pluck('name', 'id');
                     }),
+
+                    Forms\Components\TextInput::make('phone')
+                    ->label(__('Phone'))
+                    ->nullable(),
+
+                    Forms\Components\TextInput::make('guardian_name')
+                    ->label(__('Guardian Name'))
+                    ->required(),
+
+
+                    Forms\Components\TextInput::make('guardian_phone')
+                    ->label(__('Guardian Phone'))
+                    ->required(),
+
+                    Forms\Components\Textarea::make('address')
+                    ->rows(3)
+                    ->label(__('Address'))
+                    ->nullable(),
+
+
+
+
             ]);
     }
 
