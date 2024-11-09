@@ -6,6 +6,8 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -44,6 +46,15 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutPermission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User withoutRole($roles, $guard = null)
  * @property-read bool $is_super_admin
+ * @property int $is_active
+ * @property \Illuminate\Support\Carbon|null $deleted_at
+ * @property-read \App\Models\Teacher|null $teacher
+ * @method static \Illuminate\Database\Eloquent\Builder|User onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|User teacher()
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereDeletedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder|User withoutTrashed()
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements FilamentUser, MustVerifyEmail
@@ -51,6 +62,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
     use HasFactory, Notifiable;
     use HasRoles;
     use \Illuminate\Auth\MustVerifyEmail;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -61,6 +73,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
         'name',
         'email',
         'password',
+        'is_active',
     ];
 
     /**
@@ -88,12 +101,20 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasRole('superAdmin') && $this->hasVerifiedEmail();
+        return $this->hasAnyRole(['superAdmin', 'teacher']) && $this->hasVerifiedEmail();
     }
 
     public function getIsSuperAdminAttribute(): bool
     {
         return $this->hasRole('superAdmin');
+    }
 
+    public function teacher(): HasOne
+    {
+        return $this->hasOne(Teacher::class);
+    }
+    public function scopeTeacher($query)
+    {
+        return $query->whereHas('teacher');
     }
 }

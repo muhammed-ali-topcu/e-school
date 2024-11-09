@@ -45,6 +45,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \App\Models\Grade|null $grade
  * @method static \Illuminate\Database\Eloquent\Builder|WeekProgram whereDayIndex($value)
  * @property-read string $day_name
+ * @property int $academic_year_id
+ * @property-read \App\Models\AcademicYear $academicYear
+ * @method static \Illuminate\Database\Eloquent\Builder|WeekProgram whereAcademicYearId($value)
  * @mixin \Eloquent
  */
 class WeekProgram extends Model
@@ -60,7 +63,20 @@ class WeekProgram extends Model
         'section_id',
         'subject_id',
         'is_active',
+        'academic_year_id'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        self::creating(function (self $weekProgram) {
+            $weekProgram->academicYear()->associate(AcademicYear::getCurrent());
+        });
+    }
+    public function academicYear(): BelongsTo
+    {
+        return $this->belongsTo(AcademicYear::class);
+    }
 
     public function section(): BelongsTo
     {
