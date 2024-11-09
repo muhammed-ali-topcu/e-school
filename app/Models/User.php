@@ -92,7 +92,7 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->hasAnyRole(['superAdmin','teacher']) && $this->hasVerifiedEmail();
+        return $this->hasAnyRole(['superAdmin', 'teacher']) && $this->hasVerifiedEmail();
     }
 
     public function getIsSuperAdminAttribute(): bool
@@ -102,7 +102,10 @@ class User extends Authenticatable implements FilamentUser, MustVerifyEmail
 
     public function teacher(): HasOne
     {
-
         return $this->hasOne(Teacher::class);
+    }
+    public function scopeTeacher($query)
+    {
+        return $query->whereHas('teacher');
     }
 }

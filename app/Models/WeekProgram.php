@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $day
@@ -60,7 +60,20 @@ class WeekProgram extends Model
         'section_id',
         'subject_id',
         'is_active',
+        'academic_year_id'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+        self::creating(function (self $weekProgram) {
+            $weekProgram->academicYear()->associate(AcademicYear::getCurrent());
+        });
+    }
+    public function academicYear(): BelongsTo
+    {
+        return $this->belongsTo(AcademicYear::class);
+    }
 
     public function section(): BelongsTo
     {
