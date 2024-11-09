@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $day
@@ -45,6 +45,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property-read \App\Models\Grade|null $grade
  * @method static \Illuminate\Database\Eloquent\Builder|WeekProgram whereDayIndex($value)
  * @property-read string $day_name
+ * @property int $academic_year_id
+ * @property-read \App\Models\AcademicYear $academicYear
+ * @method static \Illuminate\Database\Eloquent\Builder|WeekProgram whereAcademicYearId($value)
  * @mixin \Eloquent
  */
 class WeekProgram extends Model

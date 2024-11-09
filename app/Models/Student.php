@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $name
@@ -42,6 +42,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Student whereEnrollmentDate($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Student withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Student withoutTrashed()
+ * @property string|null $phone
+ * @property string $guardian_name
+ * @property string $guardian_phone
+ * @property string|null $address
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereGuardianName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student whereGuardianPhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Student wherePhone($value)
  * @mixin \Eloquent
  */
 class Student extends Model
