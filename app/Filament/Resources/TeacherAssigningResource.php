@@ -29,6 +29,16 @@ class TeacherAssigningResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getPluralLabel(): string
+    {
+        return __('Teacher Assignings');
+    }
+    public static function getLabel(): ?string
+    {
+        return __('Teacher Assigning');
+    }
+
+
     public static function form(Form $form): Form
     {
         return $form
