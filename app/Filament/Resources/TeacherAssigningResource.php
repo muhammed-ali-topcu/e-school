@@ -5,19 +5,15 @@ namespace App\Filament\Resources;
 
 use App\Models\TeacherAssigning;
 use App\Filament\Resources\TeacherAssigningResource\Pages;
-use App\Helpers\Settings;
 use App\Models\Section;
 use App\Models\User;
 use App\Models\Subject;
-use App\Models\WeekProgram;
-use App\Rules\UniqueWeekProgramTime;
-use Carbon\Carbon;
+use App\Rules\UniqueSectionSubjectTeacher;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
 
@@ -47,7 +43,14 @@ class TeacherAssigningResource extends Resource
                     ->label(__('Section'))
                     ->required()
                     ->live()
-                    ->relationship('section', 'name'),
+                    ->relationship('section', 'name')
+                    ->rules([
+                        fn(Get $get): UniqueSectionSubjectTeacher => new UniqueSectionSubjectTeacher(
+                            $get('section_id'),
+                            $get('subject_id'),
+                            $get('id') // This will be null for new records and set for existing ones
+                        ),
+                    ]),
 
                 Forms\Components\Select::make('subject_id')
                     ->label(__('Subject'))
@@ -55,7 +58,14 @@ class TeacherAssigningResource extends Resource
                     ->options(function ($get) {
                         $section = Section::find($get('section_id'));
                         return Subject::where('grade_id', $section?->grade_id)->pluck('name', 'id');
-                    }),
+                    })
+                    ->rules([
+                        fn(Get $get): UniqueSectionSubjectTeacher => new UniqueSectionSubjectTeacher(
+                            $get('section_id'),
+                            $get('subject_id'),
+                            $get('id') // This will be null for new records and set for existing ones
+                        ),
+                    ]),
 
                 Forms\Components\Select::make('user_id')
                     ->label(__('Teacher'))
@@ -80,7 +90,7 @@ class TeacherAssigningResource extends Resource
                     ->label(__('Subject')),
 
                 Tables\Columns\TextColumn::make('user.name')
-                ->searchable()
+                    ->searchable()
                     ->label(__('Teacher')),
 
             ])
