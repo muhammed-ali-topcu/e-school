@@ -64,7 +64,7 @@ class TeacherResource extends Resource
                     ->nullable(),
 
                 Forms\Components\TextInput::make('phone')
-                    ->mask('(999) 999 9999')
+                    ->mask('(999)-999-9999')
                     ->placeholder('5xx xxx xxxx')
                     ->label(__('Phone'))
                     ->nullable(),

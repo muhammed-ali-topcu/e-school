@@ -65,7 +65,7 @@ class StudentResource extends Resource
 
                     Forms\Components\TextInput::make('phone')
                     ->label(__('Phone'))
-                    ->mask('(999) 999 9999')
+                    ->mask('(999)-999-9999')
                     ->placeholder('5xx xxx xxxx')
                     ->nullable(),
 
@@ -76,7 +76,7 @@ class StudentResource extends Resource
 
                     Forms\Components\TextInput::make('guardian_phone')
                     ->label(__('Guardian Phone'))
-                    ->mask('(999) 999 9999')
+                    ->mask('(999)-999-9999')
                     ->placeholder('5xx xxx xxxx')
                     ->required(),
 
