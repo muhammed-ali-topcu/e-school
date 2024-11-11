@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Translatable\HasTranslations;
 
 /**
  * Class Section
@@ -52,6 +53,7 @@ class Section extends Model
 {
     use SoftDeletes;
     use HasActiveScope;
+    use HasTranslations;
 
     protected $table = 'sections';
 
@@ -63,9 +65,27 @@ class Section extends Model
     protected $fillable = [
         'name',
         'grade_id',
+        'code',
         'is_active'
     ];
 
+    protected $translatable = ['name'];
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function (self $model) {
+            $model->setTranslation('name', 'en', $model->grade->getTranslation('name', 'en').' '.$model->code);
+            $model->setTranslation('name', 'ar', $model->grade->getTranslation('name', 'ar').' '.$model->code);
+            $model->setTranslation('name', 'tr', $model->grade->getTranslation('name', 'tr').' '.$model->code);
+        });
+        static::updating(function (self $model) {
+            $model->setTranslation('name', 'en', $model->grade->getTranslation('name', 'en').' '.$model->code);
+            $model->setTranslation('name', 'ar', $model->grade->getTranslation('name', 'ar').' '.$model->code);
+            $model->setTranslation('name', 'tr', $model->grade->getTranslation('name', 'tr').' '.$model->code);
+        });
+
+    }
 
     public function grade()
     {
@@ -88,4 +108,9 @@ class Section extends Model
         return $this->hasMany(WeekProgram::class);
     }
 
+    // public function getNameAttribute($value)
+    // {
+
+    //     return $this->grade->name.' '.$this->code;
+    // }
 }
