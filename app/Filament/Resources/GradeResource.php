@@ -20,6 +20,7 @@ class GradeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static bool $shouldRegisterNavigation = false;
 
     public static function getPluralLabel(): string {
         return __('Grades');
