@@ -1,5 +1,6 @@
 {
     "auth.password": "auth.password",
+    "There is already a teacher assigned to this section and subject.": "There is already a teacher assigned to this section and subject.",
     "There is already a program scheduled at this time for the selected section and day.": "There is already a program scheduled at this time for the selected section and day.",
     "Subjects": "Subjects",
     "Subject": "Subject",
@@ -19,6 +20,7 @@
     "Grades": "Grades",
     "Sequence": "Sequence",
     "Sections": "Sections",
+    "Code": "Code",
     "Teachers": "Teachers",
     "Teacher": "Teacher",
     "Essential Info": "Essential Info",
