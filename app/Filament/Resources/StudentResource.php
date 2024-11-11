@@ -63,24 +63,24 @@ class StudentResource extends Resource
                         return Section::where('grade_id', $get('grade_id'))->pluck('name', 'id');
                     }),
 
-                    Forms\Components\TextInput::make('phone')
+                Forms\Components\TextInput::make('phone')
                     ->label(__('Phone'))
-                    ->mask('(999)-999-9999')
-                    ->placeholder('5xx xxx xxxx')
+                    ->mask('9999999999')
+                    ->placeholder('5xxxxxxxxx')
                     ->nullable(),
 
-                    Forms\Components\TextInput::make('guardian_name')
+                Forms\Components\TextInput::make('guardian_name')
                     ->label(__('Guardian Name'))
                     ->required(),
 
 
-                    Forms\Components\TextInput::make('guardian_phone')
+                Forms\Components\TextInput::make('guardian_phone')
                     ->label(__('Guardian Phone'))
-                    ->mask('(999)-999-9999')
-                    ->placeholder('5xx xxx xxxx')
+                    ->mask('9999999999')
+                    ->placeholder('5xxxxxxxxx')
                     ->required(),
 
-                    Forms\Components\Textarea::make('address')
+                Forms\Components\Textarea::make('address')
                     ->rows(3)
                     ->label(__('Address'))
                     ->nullable(),
@@ -107,14 +107,12 @@ class StudentResource extends Resource
                 Tables\Columns\BooleanColumn::make('is_active')
                     ->label(__('Active')),
             ])
-            ->filters([
-            ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                ]),
+                Tables\Actions\BulkActionGroup::make([]),
             ]);
     }
 
