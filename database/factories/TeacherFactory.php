@@ -17,8 +17,9 @@ class TeacherFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'is_active' => rand(0,1),
+            'specialty' => fake()->word(),
+            'phone' => fake()->phoneNumber(),
+            'address' => fake()->address(),
         ];
     }
 }

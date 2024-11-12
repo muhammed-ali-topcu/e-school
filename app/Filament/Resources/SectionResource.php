@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SectionResource\Pages;
 use App\Filament\Resources\SectionResource\RelationManagers;
+use App\Helpers\Settings;
 use App\Models\Grade;
 use App\Models\Section;
 use Filament\Forms;
@@ -13,6 +14,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use OpenSpout\Reader\ODS\Helper\SettingsHelper;
 
 class SectionResource extends Resource
 {
@@ -21,7 +23,8 @@ class SectionResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
 
-    public static function getPluralLabel(): string {
+    public static function getPluralLabel(): string
+    {
         return __('Sections');
     }
 
@@ -35,17 +38,22 @@ class SectionResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label(__('Name'))
-                    ->required(),
-                Forms\Components\Toggle::make('is_active')
-                    ->label(__('Active'))
-                    ->default(true),
 
                 Forms\Components\Select::make('grade_id')
                     ->required()
                     ->label(__('Grade'))
-                    ->options(Grade::active()->pluck('name', 'id'))
+                    ->options(Grade::active()->pluck('name', 'id')),
+
+
+                Forms\Components\Select::make('code')
+                    ->required()
+                    ->label(__('Code'))
+                    ->options(Settings::getSectionCodes()),
+
+                Forms\Components\Toggle::make('is_active')
+                    ->label(__('Active'))
+                    ->default(true),
+
             ]);
     }
 
@@ -56,9 +64,11 @@ class SectionResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label(__('Name'))
                     ->searchable(),
+
                 Tables\Columns\TextColumn::make('grade.name')
                     ->label(__('Grade'))
                     ->searchable(),
+
                 Tables\Columns\BooleanColumn::make('is_active')
                     ->label(__('Active')),
 
@@ -70,8 +80,7 @@ class SectionResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                ]),
+                Tables\Actions\BulkActionGroup::make([]),
             ]);
     }
 
@@ -81,6 +90,8 @@ class SectionResource extends Resource
             //
         ];
     }
+
+
 
     public static function getPages(): array
     {

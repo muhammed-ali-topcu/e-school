@@ -40,6 +40,11 @@ use Spatie\Translatable\HasTranslations;
  * @property-read int|null $subjects_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Student> $students
  * @property-read int|null $students_count
+ * @property-read mixed $translations
+ * @method static \Illuminate\Database\Eloquent\Builder|Grade whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder|Grade whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder|Grade whereLocale(string $column, string $locale)
+ * @method static \Illuminate\Database\Eloquent\Builder|Grade whereLocales(string $column, array $locales)
  * @mixin \Eloquent
  */
 class Grade extends Model
@@ -50,7 +55,9 @@ class Grade extends Model
     use HasTranslations;
 
     protected $fillable = [
-        'name', 'is_active', 'sequence'
+        'name',
+        'is_active',
+        'sequence'
     ];
     public $translatable = ['name'];
 
@@ -58,7 +65,7 @@ class Grade extends Model
     {
         parent::boot();
         self::created(function (self $grade) {
-            $grade->sections()->save(new Section(['name' => "{$grade->name} - A"]));
+            $grade->sections()->save(new Section(['code' =>  "A"]));
         });
     }
 
@@ -81,6 +88,4 @@ class Grade extends Model
     {
         return $this->hasMany(Student::class);
     }
-
-
 }

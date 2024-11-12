@@ -18,6 +18,10 @@ return new class extends Migration {
             $table->boolean('is_active');
             $table->date('birth_date');
             $table->date('enrollment_date');
+            $table->string('phone')->nullable();
+            $table->string('guardian_name');
+            $table->string('guardian_phone');
+            $table->text('address')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

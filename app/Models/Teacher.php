@@ -30,6 +30,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|Teacher whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Teacher withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Teacher withoutTrashed()
+ * @property string|null $specialty
+ * @property int|null $user_id
+ * @property string|null $phone
+ * @property string $address
+ * @property-read \App\Models\User|null $user
+ * @method static \Illuminate\Database\Eloquent\Builder|Teacher whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Teacher wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Teacher whereSpecialty($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Teacher whereUserId($value)
  * @mixin \Eloquent
  */
 class Teacher extends Model
@@ -38,10 +47,15 @@ class Teacher extends Model
     use SoftDeletes;
     use HasActiveScope;
 
-
     protected $fillable = [
-        'name',
-        'is_active',
+        'user_id',
+        'specialty',
+        'phone',
+        'address',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
