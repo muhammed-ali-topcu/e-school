@@ -85,8 +85,10 @@ class StudentResource extends Resource
                     ->label(__('Address'))
                     ->nullable(),
 
-
-
+                Forms\Components\Textarea::make('note')
+                    ->rows(5)
+                    ->label(__('Note'))
+                    ->nullable(),
 
             ]);
     }
