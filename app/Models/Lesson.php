@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -56,6 +57,13 @@ class Lesson extends Model
             'academic_year_id',
         ];
 
+    protected static function boot()
+    {
+        parent::boot();
+        self::creating(function (self $weekProgram) {
+            $weekProgram->academicYear()->associate(AcademicYear::getCurrent());
+        });
+    }
     public function section(): BelongsTo
     {
         return $this->belongsTo(Section::class);
@@ -74,5 +82,8 @@ class Lesson extends Model
     public function attendances(): HasMany
     {
         return $this->hasMany(Attendance::class);
+    }
+    public function students(): HasManyThrough{
+        return $this->hasManyThrough(Student::class, Attendance::class);
     }
 }

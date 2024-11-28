@@ -53,4 +53,8 @@ class Attendance extends Model
     {
         return $this->belongsTo(Lesson::class);
     }
+    public function scopeIsPresent($query)
+    {
+        return $query->where('is_present', true);
+    }
 }

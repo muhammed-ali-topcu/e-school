@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\SectionResource\Pages;
 
+use App\Filament\Resources\LessonResource;
 use App\Filament\Resources\SectionResource;
 use App\Filament\Resources\StudentResource;
 use App\Models\Section;
@@ -51,15 +52,13 @@ class ViewSection extends ViewRecord
                                 TextEntry::make('id')
                                     ->hiddenLabel()
                                     ->formatStateUsing(fn() => __('Take Attendance'))
-                                    //->url(StudentResource::getUrl('take-attendance'))
+                                    ->url(function ($record) {
+                                        return LessonResource::getUrl('create', ['section_id' => $this->record->id, 'subject_id' => $record->id]);
+                                    })
                                     ->color('success')
                             ]),
-
-
                         ])
                         ->columnSpanFull()
-
-
                     ,
                 ]),
 

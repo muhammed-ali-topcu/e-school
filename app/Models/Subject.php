@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * 
+ *
  *
  * @property int $id
  * @property string $name
@@ -65,6 +65,10 @@ class Subject extends Model
     public function weekPrograms(): HasMany
     {
         return $this->hasMany(WeekProgram::class);
+    }
+    public function lessons():HasMany
+    {
+        return $this->hasMany(Lesson::class);
     }
 
 

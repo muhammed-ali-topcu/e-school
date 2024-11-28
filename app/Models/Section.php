@@ -120,4 +120,10 @@ class Section extends Model
 
     //     return $this->grade->name.' '.$this->code;
     // }
+
+
+    public function lessons():HasMany
+    {
+        return $this->hasMany(Lesson::class);
+    }
 }
