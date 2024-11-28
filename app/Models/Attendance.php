@@ -37,12 +37,12 @@ class Attendance extends Model
     use HasFactory;
 
     protected $fillable
-        = [
+        = array(
             'student_id',
             'lesson_id',
             'is_present',
             'description',
-        ];
+        );
 
     public function student(): BelongsTo
     {
