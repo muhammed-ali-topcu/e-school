@@ -9,6 +9,7 @@ use App\Models\Grade;
 use App\Models\Section;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -78,6 +79,7 @@ class SectionResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([]),
@@ -99,6 +101,8 @@ class SectionResource extends Resource
             'index' => Pages\ListSections::route('/'),
             'create' => Pages\CreateSection::route('/create'),
             'edit' => Pages\EditSection::route('/{record}/edit'),
+            'view' => Pages\ViewSection::route('/{record}'),
         ];
     }
+
 }

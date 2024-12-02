@@ -47,6 +47,13 @@ use Spatie\Translatable\HasTranslations;
  * @property-read int|null $subjects_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\WeekProgram> $weekPrograms
  * @property-read int|null $week_programs_count
+ * @property string $code
+ * @property-read mixed $translations
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereJsonContainsLocale(string $column, string $locale, ?mixed $value, string $operand = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereLocale(string $column, string $locale)
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereLocales(string $column, array $locales)
  * @mixin \Eloquent
  */
 class Section extends Model
@@ -113,4 +120,10 @@ class Section extends Model
 
     //     return $this->grade->name.' '.$this->code;
     // }
+
+
+    public function lessons():HasMany
+    {
+        return $this->hasMany(Lesson::class);
+    }
 }
