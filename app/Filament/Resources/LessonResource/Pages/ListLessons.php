@@ -10,11 +10,10 @@ class ListLessons extends ListRecords
 {
     protected static string $resource = LessonResource::class;
 
-    protected function getHeaderActions(): array
+    public  function getTitle():string
     {
-        return [
-
-        ];
+        return __('Attendances');
     }
+
 
 }

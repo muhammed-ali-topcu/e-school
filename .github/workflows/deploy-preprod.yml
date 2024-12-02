@@ -27,9 +27,12 @@ jobs:
           script: |
             cd domains
             cd e-school-preprod.nicesoft.me/
+            php artisan cache:clear
+            php artisan optimize:clear
             git pull
             php ~/composer.phar install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --no-dev
             php artisan migrate:fresh --seed --force
+            php artisan optimize
       # - name: Install SSH key
       #   run: |
       #     mkdir -p ~/.ssh/

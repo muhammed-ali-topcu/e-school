@@ -6,6 +6,7 @@ use App\Filament\Resources\LessonResource;
 use App\Filament\Resources\SectionResource;
 use App\Models\Attendance;
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Contracts\Support\Htmlable;
 
 
 class CreateLesson extends CreateRecord
@@ -24,6 +25,11 @@ class CreateLesson extends CreateRecord
             'subject_id' => $subjectId,
             'date'       => now()->format('Y-m-d'),
         ]);
+    }
+
+    public function getTitle(): string|Htmlable
+    {
+        return __('Take Attendance');
     }
 
     public function afterCreate(): void
