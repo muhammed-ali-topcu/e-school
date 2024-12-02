@@ -87,6 +87,7 @@ class StudentResource extends Resource
 
                 Forms\Components\Textarea::make('note')
                     ->rows(5)
+                    ->columnSpanFull()
                     ->label(__('Note'))
                     ->nullable(),
 

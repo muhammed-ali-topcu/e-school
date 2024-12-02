@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Translatable\HasTranslations;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string $name
