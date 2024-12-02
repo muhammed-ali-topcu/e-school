@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Student::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(\App\Models\Lesson::class)->constrained()->cascadeOnDelete();
             $table->boolean('is_present')->default(0);
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\LessonResource\Pages;
 
 use App\Filament\Resources\LessonResource;
+use App\Filament\Resources\SectionResource;
 use App\Models\Attendance;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -30,5 +31,14 @@ class EditLesson extends EditRecord
         }
     }
 
+    protected function getRedirectUrl(): string
+    {
+        return SectionResource::getUrl('view', ['record' => $this->form->getRecord()->section_id]);
+    }
+
+    protected function getCreatedNotificationTitle(): ?string
+    {
+        return __('Attendance saved successfully');
+    }
 
 }

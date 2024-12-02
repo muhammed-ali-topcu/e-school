@@ -47,15 +47,24 @@ class ViewSection extends ViewRecord
                     RepeatableEntry::make('grade.subjects')
                         ->hiddenLabel()
                         ->schema([
-                            Grid::make()->schema([
+                            Grid::make(3)->schema([
                                 TextEntry::make('name')->hiddenLabel(),
-                                TextEntry::make('id')
+
+                                TextEntry::make('created_at')
                                     ->hiddenLabel()
                                     ->formatStateUsing(fn() => __('Take Attendance'))
                                     ->url(function ($record) {
                                         return LessonResource::getUrl('create', ['section_id' => $this->record->id, 'subject_id' => $record->id]);
                                     })
-                                    ->color('success')
+                                    ->color('success'),
+
+                                TextEntry::make('id')
+                                    ->hiddenLabel()
+                                    ->formatStateUsing(fn() => __('Past Attendances'))
+                                    ->url(function ($record) {
+                                        return LessonResource::getUrl('index', ['tableFilters' => ['section_id' => ['value' => $this->record->id], 'subject_id' => ['value' => $record->id]]]);
+                                    })
+                                    ->color('info'),
                             ]),
                         ])
                         ->columnSpanFull()

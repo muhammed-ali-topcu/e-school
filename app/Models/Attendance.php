@@ -57,4 +57,8 @@ class Attendance extends Model
     {
         return $query->where('is_present', true);
     }
+    public function scopeIsNotPresent($query)
+    {
+        return $query->where('is_present', false);
+    }
 }

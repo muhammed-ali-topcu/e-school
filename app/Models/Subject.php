@@ -72,4 +72,5 @@ class Subject extends Model
     }
 
 
+
 }
