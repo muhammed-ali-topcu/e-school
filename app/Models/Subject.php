@@ -54,13 +54,7 @@ class Subject extends Model
     use SoftDeletes;
     use HasActiveScope;
 
-
-    protected $fillable = ['name', 'description', 'is_active', 'grade_id'];
-
-    public function grade()
-    {
-        return $this->belongsTo(Grade::class);
-    }
+    protected $fillable = ['name', 'description', 'is_active'];
 
     public function weekPrograms(): HasMany
     {

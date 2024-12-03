@@ -33,8 +33,8 @@ class DatabaseSeeder extends Seeder
         $this->call(SubjectSeeder::class);
         $this->call(StudentSeeder::class);
         $this->call(TeacherSeeder::class);
-        $this->call(TeacherAssigningSeeder::class);
-        $this->call(WeekProgramSeeder::class);
+//        $this->call(TeacherAssigningSeeder::class);
+//        $this->call(WeekProgramSeeder::class);
     }
 
 
