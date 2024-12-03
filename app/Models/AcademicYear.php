@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -32,6 +33,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder|AcademicYear whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AcademicYear whereStartsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|AcademicYear whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exam> $exams
+ * @property-read int|null $exams_count
  * @mixin \Eloquent
  */
 class AcademicYear extends Model
@@ -49,5 +52,10 @@ class AcademicYear extends Model
     public static function getCurrent(): self
     {
         return self::where('is_active', true)->firstOrFail();
+    }
+
+    public function exams():HasMany
+    {
+        return $this->hasMany(Exam::class);
     }
 }

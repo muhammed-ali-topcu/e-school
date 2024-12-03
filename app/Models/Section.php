@@ -54,6 +54,10 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereLocale(string $column, string $locale)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereLocales(string $column, array $locales)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Lesson> $lessons
+ * @property-read int|null $lessons_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Exam> $exams
+ * @property-read int|null $exams_count
  * @mixin \Eloquent
  */
 class Section extends Model
@@ -125,5 +129,10 @@ class Section extends Model
     public function lessons():HasMany
     {
         return $this->hasMany(Lesson::class);
+    }
+
+    public function exams():HasMany
+    {
+        return $this->hasMany(Exam::class);
     }
 }

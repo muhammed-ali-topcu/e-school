@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property string|null $title
@@ -38,6 +38,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Lesson whereTime($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Lesson whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Lesson whereUpdatedAt($value)
+ * @property-read \App\Models\AcademicYear $academicYear
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Attendance> $attendances
+ * @property-read int|null $attendances_count
+ * @property-read \App\Models\Section $section
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Student> $students
+ * @property-read int|null $students_count
+ * @property-read \App\Models\Subject $subject
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Lesson onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Lesson withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Lesson withoutTrashed()
  * @mixin \Eloquent
  */
 class Lesson extends Model
