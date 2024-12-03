@@ -43,25 +43,26 @@ class StudentResource extends Resource
                     ->default(true)
                     ->required(),
 
-                Forms\Components\DatePicker::make('birth_date')
-                    ->label(__('Birth Date'))
-                    ->required(),
-
-                Forms\Components\DatePicker::make('enrollment_date')
-                    ->label(__('Enrollment Date'))
-                    ->required(),
-
                 Forms\Components\Select::make('grade_id')
                     ->label(__('Grade'))
                     ->required()
                     ->live()
                     ->relationship('grade', 'name'),
+
                 Forms\Components\Select::make('section_id')
                     ->label(__('Section'))
                     ->required()
                     ->options(function ($get) {
                         return Section::where('grade_id', $get('grade_id'))->pluck('name', 'id');
                     }),
+
+                Forms\Components\DatePicker::make('birth_date')
+                    ->label(__('Birth Date'))
+                    ->nullable(),
+
+                Forms\Components\DatePicker::make('enrollment_date')
+                    ->label(__('Enrollment Date'))
+                    ->nullable(),
 
                 Forms\Components\TextInput::make('phone')
                     ->label(__('Phone'))
@@ -71,22 +72,24 @@ class StudentResource extends Resource
 
                 Forms\Components\TextInput::make('guardian_name')
                     ->label(__('Guardian Name'))
-                    ->required(),
-
+                    ->nullable(),
 
                 Forms\Components\TextInput::make('guardian_phone')
                     ->label(__('Guardian Phone'))
                     ->mask('9999999999')
                     ->placeholder('5xxxxxxxxx')
-                    ->required(),
+                    ->nullable(),
 
                 Forms\Components\Textarea::make('address')
                     ->rows(3)
                     ->label(__('Address'))
                     ->nullable(),
 
-
-
+                Forms\Components\Textarea::make('note')
+                    ->rows(5)
+                    ->columnSpanFull()
+                    ->label(__('Note'))
+                    ->nullable(),
 
             ]);
     }
