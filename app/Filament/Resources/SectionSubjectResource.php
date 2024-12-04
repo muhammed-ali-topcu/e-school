@@ -32,6 +32,7 @@ class SectionSubjectResource extends Resource
     {
         return __('Subject Assignment');
     }
+
     public static function getNavigationSort(): int
     {
         return 6;
@@ -98,11 +99,6 @@ class SectionSubjectResource extends Resource
             ])->filtersLayout(Tables\Enums\FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
