@@ -44,7 +44,7 @@ class ViewSection extends ViewRecord
 //                ]),
 
                 Tab::make(__('Subjects'))->schema([
-                    RepeatableEntry::make('grade.subjects')
+                    RepeatableEntry::make('subjects')
                         ->hiddenLabel()
                         ->schema([
                             Grid::make(3)->schema([

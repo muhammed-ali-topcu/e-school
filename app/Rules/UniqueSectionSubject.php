@@ -2,12 +2,11 @@
 
 namespace App\Rules;
 
-use App\Models\TeacherAssigning;
-use App\Models\WeekProgram;
+use App\Models\SectionSubject;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class UniqueSectionSubjectTeacher implements ValidationRule
+class UniqueSectionSubject implements ValidationRule
 {
     protected $sectionId;
     protected $subjectId;
@@ -22,7 +21,7 @@ class UniqueSectionSubjectTeacher implements ValidationRule
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $query = TeacherAssigning::where('section_id', $this->sectionId)
+        $query = SectionSubject::where('section_id', $this->sectionId)
             ->where('subject_id', $this->subjectId);
 
         if ($this->ignoreId) {
@@ -32,7 +31,7 @@ class UniqueSectionSubjectTeacher implements ValidationRule
         $exists = $query->exists();
 
         if ($exists) {
-            $fail(__('There is already a teacher assigned to this section and subject.'));
+            $fail(__('This subject is already assigned to this section.'));
         }
     }
 }

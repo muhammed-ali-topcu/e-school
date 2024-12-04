@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- *
+ * 
  *
  * @property int $id
  * @property int $student_id
@@ -29,6 +29,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereLessonId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereStudentId($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance whereUpdatedAt($value)
+ * @property-read \App\Models\Lesson $lesson
+ * @property-read \App\Models\Student $student
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance isNotPresent()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Attendance isPresent()
  * @mixin \Eloquent
  */
 class Attendance extends Model
