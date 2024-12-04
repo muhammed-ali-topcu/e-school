@@ -9,6 +9,8 @@ namespace App\Models;
 use App\Models\Traits\HasActiveScope;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -54,6 +56,8 @@ use Spatie\Translatable\HasTranslations;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereJsonContainsLocales(string $column, array $locales, ?mixed $value, string $operand = '=')
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereLocale(string $column, string $locale)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Section whereLocales(string $column, array $locales)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Lesson> $lessons
+ * @property-read int|null $lessons_count
  * @mixin \Eloquent
  */
 class Section extends Model
@@ -82,14 +86,14 @@ class Section extends Model
     {
         parent::boot();
         static::creating(function (self $model) {
-            $model->setTranslation('name', 'en', $model->grade->getTranslation('name', 'en').' '.$model->code);
-            $model->setTranslation('name', 'ar', $model->grade->getTranslation('name', 'ar').' '.$model->code);
-            $model->setTranslation('name', 'tr', $model->grade->getTranslation('name', 'tr').' '.$model->code);
+            $model->setTranslation('name', 'en', $model->grade->getTranslation('name', 'en') . ' ' . $model->code);
+            $model->setTranslation('name', 'ar', $model->grade->getTranslation('name', 'ar') . ' ' . $model->code);
+            $model->setTranslation('name', 'tr', $model->grade->getTranslation('name', 'tr') . ' ' . $model->code);
         });
         static::updating(function (self $model) {
-            $model->setTranslation('name', 'en', $model->grade->getTranslation('name', 'en').' '.$model->code);
-            $model->setTranslation('name', 'ar', $model->grade->getTranslation('name', 'ar').' '.$model->code);
-            $model->setTranslation('name', 'tr', $model->grade->getTranslation('name', 'tr').' '.$model->code);
+            $model->setTranslation('name', 'en', $model->grade->getTranslation('name', 'en') . ' ' . $model->code);
+            $model->setTranslation('name', 'ar', $model->grade->getTranslation('name', 'ar') . ' ' . $model->code);
+            $model->setTranslation('name', 'tr', $model->grade->getTranslation('name', 'tr') . ' ' . $model->code);
         });
 
     }
@@ -97,11 +101,6 @@ class Section extends Model
     public function grade()
     {
         return $this->belongsTo(Grade::class);
-    }
-
-    public function subjects(): HasManyThrough
-    {
-        return $this->hasManyThrough(Subject::class, Grade::class, 'id', 'grade_id', 'id', 'id');
     }
 
 
@@ -115,15 +114,20 @@ class Section extends Model
         return $this->hasMany(WeekProgram::class);
     }
 
-    // public function getNameAttribute($value)
-    // {
-
-    //     return $this->grade->name.' '.$this->code;
-    // }
-
-
-    public function lessons():HasMany
+    public function lessons(): HasMany
     {
         return $this->hasMany(Lesson::class);
     }
+
+    public function sectionSubjects(): HasMany
+    {
+        return $this->hasMany(SectionSubject::class);
+    }
+
+    public function subjects()
+    {
+        return $this->hasManyThrough(Subject::class, SectionSubject::class, 'section_id', 'id', 'id', 'subject_id');
+    }
+
+
 }

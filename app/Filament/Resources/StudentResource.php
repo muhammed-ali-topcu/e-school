@@ -29,6 +29,10 @@ class StudentResource extends Resource
     {
         return __('Student');
     }
+    public static function getNavigationSort(): int
+    {
+        return 4;
+    }
 
     public static function form(Form $form): Form
     {
@@ -110,7 +114,11 @@ class StudentResource extends Resource
                 Tables\Columns\BooleanColumn::make('is_active')
                     ->label(__('Active')),
             ])
-            ->filters([])
+            ->filters([
+                Tables\Filters\SelectFilter::make('section_id')
+                    ->label(__('Section'))
+                    ->relationship('section', 'name'),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

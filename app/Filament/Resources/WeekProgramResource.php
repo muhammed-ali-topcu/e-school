@@ -32,6 +32,10 @@ class WeekProgramResource extends Resource
     {
         return __('Week Program');
     }
+    public static function getNavigationSort(): int
+    {
+        return 7;
+    }
 
     public static function form(Form $form): Form
     {
@@ -41,14 +45,18 @@ class WeekProgramResource extends Resource
                     ->label(__('Section'))
                     ->required()
                     ->live()
+                    ->disabledOn('edit')
                     ->relationship('section', 'name'),
 
                 Forms\Components\Select::make('subject_id')
                     ->label(__('Subject'))
+                    ->disabledOn('edit')
                     ->required()
                     ->options(function ($get) {
-                        $section = Section::find($get('section_id'));
-                        return Subject::where('grade_id', $section?->grade_id)->pluck('name', 'id');
+                        if ($get('section_id')) {
+                            $section = Section::find($get('section_id'));
+                            return $section->subjects()->get()->pluck('name', 'id');
+                        }
                     }),
 
                 Forms\Components\Select::make('day_index')

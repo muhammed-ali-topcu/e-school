@@ -38,6 +38,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Lesson whereTime($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Lesson whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Lesson whereUpdatedAt($value)
+ * @property-read \App\Models\AcademicYear $academicYear
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Attendance> $attendances
+ * @property-read int|null $attendances_count
+ * @property-read \App\Models\Section $section
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Student> $students
+ * @property-read int|null $students_count
+ * @property-read \App\Models\Subject $subject
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Lesson onlyTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Lesson withTrashed()
+ * @method static \Illuminate\Database\Eloquent\Builder<static>|Lesson withoutTrashed()
  * @mixin \Eloquent
  */
 class Lesson extends Model
@@ -60,8 +70,8 @@ class Lesson extends Model
     protected static function boot()
     {
         parent::boot();
-        self::creating(function (self $weekProgram) {
-            $weekProgram->academicYear()->associate(AcademicYear::getCurrent());
+        self::creating(function (self $lesson) {
+            $lesson->academicYear()->associate(AcademicYear::getCurrent());
         });
     }
     public function section(): BelongsTo
