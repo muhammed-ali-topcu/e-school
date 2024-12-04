@@ -110,7 +110,11 @@ class StudentResource extends Resource
                 Tables\Columns\BooleanColumn::make('is_active')
                     ->label(__('Active')),
             ])
-            ->filters([])
+            ->filters([
+                Tables\Filters\SelectFilter::make('section_id')
+                    ->label(__('Section'))
+                    ->relationship('section', 'name'),
+            ])
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

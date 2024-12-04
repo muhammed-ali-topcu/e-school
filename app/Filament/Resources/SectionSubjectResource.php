@@ -2,38 +2,36 @@
 
 namespace App\Filament\Resources;
 
-
-use App\Models\TeacherAssigning;
-use App\Filament\Resources\TeacherAssigningResource\Pages;
-use App\Models\Section;
-use App\Models\User;
-use App\Models\Subject;
+use App\Filament\Resources\SectionSubjectResource\Pages;
+use App\Filament\Resources\SectionSubjectResource\RelationManagers;
+use App\Models\SectionSubject;
+use App\Models\Teacher;
 use App\Rules\UniqueSectionSubject;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-
-
-class TeacherAssigningResource extends Resource
+class SectionSubjectResource extends Resource
 {
-    protected static ?string $model = TeacherAssigning::class;
+    protected static ?string $model = SectionSubject::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+
     public static function getPluralLabel(): string
     {
-        return __('Teacher Assignings');
-    }
-    public static function getLabel(): ?string
-    {
-        return __('Teacher Assigning');
+        return __('Subject Assignments');
     }
 
+    public static function getLabel(): string
+    {
+        return __('Subject Assignment');
+    }
 
     public static function form(Form $form): Form
     {
@@ -41,24 +39,15 @@ class TeacherAssigningResource extends Resource
             ->schema([
                 Forms\Components\Select::make('section_id')
                     ->label(__('Section'))
-                    ->required()
-                    ->live()
                     ->relationship('section', 'name')
-                    ->rules([
-                        fn(Get $get): UniqueSectionSubject => new UniqueSectionSubject(
-                            $get('section_id'),
-                            $get('subject_id'),
-                            $get('id') // This will be null for new records and set for existing ones
-                        ),
-                    ]),
+                    ->disabledOn('edit')
+                    ->required(),
 
                 Forms\Components\Select::make('subject_id')
                     ->label(__('Subject'))
+                    ->relationship('subject', 'name')
+                    ->disabledOn('edit')
                     ->required()
-                    ->options(function ($get) {
-                        $section = Section::find($get('section_id'));
-                        return Subject::pluck('name', 'id');
-                    })
                     ->rules([
                         fn(Get $get): UniqueSectionSubject => new UniqueSectionSubject(
                             $get('section_id'),
@@ -66,14 +55,13 @@ class TeacherAssigningResource extends Resource
                             $get('id') // This will be null for new records and set for existing ones
                         ),
                     ]),
-
-                Forms\Components\Select::make('user_id')
+                Forms\Components\Select::make('teacher_id')
                     ->label(__('Teacher'))
-                    ->required()
-                    ->options(function ($get) {
-                        return  User::query()->teacher()->pluck('name', 'id');
-                    }),
-
+                    ->nullable()
+                    ->options(Teacher::query()->get()->pluck('user.name', 'id')),
+                Forms\Components\Toggle::make('is_active')
+                    ->label(__('Is Active'))
+                    ->required(),
             ]);
     }
 
@@ -82,33 +70,31 @@ class TeacherAssigningResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('section.name')
-                    ->searchable()
                     ->label(__('Section')),
-
                 Tables\Columns\TextColumn::make('subject.name')
-                    ->searchable()
                     ->label(__('Subject')),
-
-                Tables\Columns\TextColumn::make('user.name')
-                    ->searchable()
+                Tables\Columns\TextColumn::make('teacher.user.name')
                     ->label(__('Teacher')),
-
+                Tables\Columns\IconColumn::make('is_active')
+                    ->label(__('Is Active'))
+                    ->boolean(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('section_id')
                     ->label(__('Section'))
                     ->relationship('section', 'name'),
 
-                Tables\Filters\SelectFilter::make('user_id')
-                    ->label(__('Teacher'))
-                    ->relationship('user', 'name'),
+                Tables\Filters\SelectFilter::make('subject_id')
+                    ->label(__('Subject'))
+                    ->relationship('subject', 'name'),
 
-            ])
-            ->filtersLayout(FiltersLayout::AboveContent)
+                Tables\Filters\SelectFilter::make('teacher_id')
+                    ->label(__('Teacher'))
+                    ->options(Teacher::query()->get()->pluck('user.name', 'id')),
+            ])->filtersLayout(Tables\Enums\FiltersLayout::AboveContent)
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
-            ->searchable()
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
@@ -123,12 +109,13 @@ class TeacherAssigningResource extends Resource
         ];
     }
 
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTeacherAssignings::route('/'),
-            'create' => Pages\CreateTeacherAssigning::route('/create'),
-            'edit' => Pages\EditTeacherAssigning::route('/{record}/edit'),
+            'index'  => Pages\ListSectionSubjects::route('/'),
+            'create' => Pages\CreateSectionSubject::route('/create'),
+            'edit'   => Pages\EditSectionSubject::route('/{record}/edit'),
         ];
     }
 }
