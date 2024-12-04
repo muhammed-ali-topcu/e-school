@@ -68,7 +68,6 @@ class WeekProgramResource extends Resource
                             $get('id') // This will be null for new records and set for existing ones
                         ),
                     ])
-                    ->format('H:i')
                     ->required()
                     ->label(__('Time')),
             ]);
