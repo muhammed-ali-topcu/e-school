@@ -32,6 +32,10 @@ class WeekProgramResource extends Resource
     {
         return __('Week Program');
     }
+    public static function getNavigationSort(): int
+    {
+        return 7;
+    }
 
     public static function form(Form $form): Form
     {

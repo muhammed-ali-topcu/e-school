@@ -32,6 +32,10 @@ class SectionSubjectResource extends Resource
     {
         return __('Subject Assignment');
     }
+    public static function getNavigationSort(): int
+    {
+        return 6;
+    }
 
     public static function form(Form $form): Form
     {

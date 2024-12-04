@@ -23,6 +23,10 @@ class SectionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getNavigationSort(): int
+    {
+        return 2;
+    }
 
     public static function getPluralLabel(): string
     {
@@ -89,19 +93,18 @@ class SectionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+
         ];
     }
-
 
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSections::route('/'),
+            'index'  => Pages\ListSections::route('/'),
             'create' => Pages\CreateSection::route('/create'),
-            'edit' => Pages\EditSection::route('/{record}/edit'),
-            'view' => Pages\ViewSection::route('/{record}'),
+            'edit'   => Pages\EditSection::route('/{record}/edit'),
+            'view'   => Pages\ViewSection::route('/{record}'),
         ];
     }
 
